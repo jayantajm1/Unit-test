@@ -47,12 +47,19 @@ ProductivityApi/
 │   ├── settings.json
 │   ├── tasks.json
 │   └── launch.json
+├── .github/                            # GitHub Actions CI/CD
+│   └── workflows/
+│       ├── ci-cd.yml                   # Main CI/CD pipeline
+│       ├── release.yml                 # Release automation
+│       └── code-quality.yml            # Code quality checks
 ├── Dockerfile                           # Docker configuration
 ├── docker-compose.yml                  # Multi-container setup
 ├── .dockerignore                       # Docker ignore file
 ├── .gitignore                          # Git ignore file
+├── .editorconfig                       # Editor configuration
 ├── ProductivityApi.sln                 # Solution file
-└── README.md                          # Comprehensive documentation
+├── README.md                          # Comprehensive documentation
+└── CI-CD-SETUP.md                     # CI/CD setup instructions
 ```
 
 ## ✅ Implemented Features
@@ -104,6 +111,16 @@ ProductivityApi/
 - **VS Code configuration** with tasks and debugging
 - **Solution file** for Visual Studio
 - **Git configuration** with comprehensive .gitignore
+- **EditorConfig** for consistent code formatting
+
+### 8. **CI/CD Pipeline**
+- **GitHub Actions** workflows for automated testing and deployment
+- **Multi-stage pipeline** with build, test, security scan, and Docker build
+- **Automated releases** with changelog generation
+- **Code quality analysis** with SonarCloud integration
+- **Branch-based deployments** (staging from develop, production from main)
+- **Docker Hub integration** for container registry
+- **Environment-based deployments** with approval workflows
 
 ## 🌐 API Endpoints
 
@@ -195,6 +212,10 @@ dotnet build
 - ✅ Complete documentation
 - ✅ VS Code development environment
 - ✅ Seed data for demonstration
+- ✅ **GitHub Actions CI/CD pipeline**
+- ✅ **Automated testing and deployment**
+- ✅ **Code quality analysis integration**
+- ✅ **Release automation with Docker Hub**
 
 ## 🚦 Quick Start Commands
 
@@ -217,4 +238,37 @@ dotnet test
 # Open browser: http://localhost:5000/swagger
 ```
 
-The solution is production-ready and includes all modern web API best practices with comprehensive testing and documentation.
+## 🔄 CI/CD Pipeline
+
+The solution includes a complete GitHub Actions CI/CD pipeline:
+
+### **Workflows**
+1. **CI/CD Pipeline** (`ci-cd.yml`)
+   - Triggers on push to main/develop and PRs to main
+   - Build → Test → Security Scan → Docker Build → Deploy
+   - Automatic staging deployment from develop branch
+   - Production deployment from main branch (with approval)
+
+2. **Release Automation** (`release.yml`)
+   - Triggers on version tags (v1.0.0, v1.1.0, etc.)
+   - Creates GitHub releases with changelogs
+   - Builds and publishes Docker images to Docker Hub
+
+3. **Code Quality** (`code-quality.yml`)
+   - SonarCloud integration for code analysis
+   - Code formatting checks with dotnet format
+   - Coverage reporting and quality gates
+
+### **Setup Instructions**
+1. See `CI-CD-SETUP.md` for detailed configuration
+2. Add required secrets to GitHub repository
+3. Configure environments for staging and production
+4. Customize deployment targets in workflow files
+
+### **Branch Strategy**
+- `main` → Production deployments
+- `develop` → Staging deployments  
+- `feature/*` → CI checks only
+- Tags `v*` → Release builds
+
+The solution is production-ready and includes all modern web API best practices with comprehensive testing, documentation, and automated CI/CD pipeline.
